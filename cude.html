@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>矩形</title>
+		<meta charset="utf-8"/>
+	</head>
+	<style>
+		.axis path,
+		.axis line{
+		    fill: none;
+		    stroke: black;
+		    shape-rendering: crispEdges;
+		}
+
+		.axis text {
+		    font-family: sans-serif;
+		    font-size: 11px;
+		}
+	</style>
+	<body>
+	    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<!--<script src="./d3.main.js"></script>-->
+		<script>
+			
+			// 矩形的数据图形
+
+			
+			var dataset = [ 250 , 210 , 170 , 130 , 90 ];  //数据（表示矩形的宽度）
+			var width = 500;
+			var height = 200;
+			var svg1 = d3.select("body")
+						 .append("svg")
+				         .attr("width", width)
+				         .attr("height", height);
+			
+			//var linear = d3.scaleLinear().domain([0,d3.max(dataset)]).range([0,250]);
+			var linear = d3.scale.linear().domain([0,d3.max(dataset)]).range([0,250]);
+			
+			
+			
+			var rectHeight = 25; // 每个矩形的高度
+			
+			svg1.selectAll("rect").data(dataset).enter().append("rect")
+				.attr("height",rectHeight-2)
+				.attr("width",function(d){
+					return linear(d);
+				})
+				.attr("y",function(d,i){ return i*25; })
+				.attr("x",20)
+				.attr("fill","#f30"+Math.floor(Math.random()*200));
+			
+			
+			var axis = d3.svg.axis()
+						.scale(linear)
+						.orient("bottom")
+						.ticks(7);
+						
+			svg1.append("g")
+				.attr("class","axis")
+				.attr("transform","translate(20,130)")
+				.call(axis);
+			
+			
+		</script>
+		
+	</body>
+</html>

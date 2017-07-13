@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<title>hello D3</title>
+		<meta charset="utf-8" />
+
+	</head>
+	<body>
+
+		<script src="./d3.main.js"></script>
+	
+		<script>
+			//var $3 = d3.select("body").append("svg").attr("width","850").attr("height","800");
+			//console.log($3);
+			var tem = function(){
+				var $3 = d3.select("body").append("svg").attr("width","850").attr("height","800");
+				var arr = [];
+				for(var i=0; i<= 20; i++){
+					var rom = Math.floor(Math.random()*500);
+					arr.push(rom);
+				}
+				console.log(arr);
+				//var datas = [12,434,145,634,67,234,67,245,190,178,338,567,309,380];
+				var datas  = arr;
+				
+
+				$3.selectAll("rect").data(datas).enter().append("rect")
+					.attr("height",function(d,i){
+						return d;
+					})
+					.attr("width",function(d,i){
+						return 30;
+					})
+				.attr("y",function(d,i){
+					return 800-d;
+				})
+				.attr("x",function(d,i){
+					return 55+35*i;
+				})
+				.attr("fill","teal")
+				.on("mouseover",function(){
+					this.style.fill = "red";
+				})
+				.on("mouseout",function(){
+					this.style.fill = "teal";
+				});
+		
+				$3.selectAll("text").data(datas).enter().append("text")
+				.style("fill","black")
+				.attr("dx",function(d,i){
+					//console.log(d);
+					var len = d.length;
+					//console.log(len);
+					return 55+35*i;
+				})
+				.attr("dy",function(d,i){
+					return 800-d;
+				})
+				.text(function(d,i){
+					return d;
+				});			
+
+			console.log($3);
+
+			
+			}
+			
+
+			/*
+			var nodes = [
+					{name:"¹ðÁÖ"},{name:"guangzhou"},{name:"xiamen"},{name:"beijing"},{name:"tiantina"}
+				];
+			
+			var edg = [
+					{source:0,target:1},{source:0,target:2},{source:1,target:3},{source:2,target:3},{source:1,target:2}
+				];
+
+			var force = d3.layout.force().nodes(nodes).links(edg).size([300,500]).linkDistance(100).charge([-400]);
+			force.start();
+			console.log(nodes);
+			console.log(edg);*/
+		
+		
+	
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+		</script>
+	
+	</body>
+</html>
